@@ -1,0 +1,20 @@
+السلام عليكم ،
+هذا شرح مبسط للبرمجة كائنية التوجه بمثال عملي .
+هو شرح للمبصرين لكن ليس مهما أن لا ترى الكود فقد كتبته لك هنا .
+https://www.youtube.com/watch?v=ayCydBZ7qmk
+
+هذا مثال للكود الذي شرحه الفيديو مع بعض التعديلات لتحسينه أضفتها أنا .
+#code :
+class Students():
+    def student(self,id ,name , age , sexe):
+        infos = f"Name = {name} , Age = {age} and Sexe = {sexe}"
+        print(10 * "# - #")
+        print(f"The informations of student with Id = {id} are :")
+        print(infos)
+        
+        
+data = Students()
+student1 = data.student(1,'ali',25 , "male")
+student2 = data.student(2, 'fatma',21 , "female")
+student82 = data.student(82, 'mariem',23 , "female")
+student100 = data.student(100, 'mahmoud', 18 , "male")

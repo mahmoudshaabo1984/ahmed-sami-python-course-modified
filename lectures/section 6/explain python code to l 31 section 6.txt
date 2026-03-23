@@ -1,0 +1,25 @@
+
+1. `x = 5`
+   - This line assigns the value 5 to the variable `x`. 
+   - Example: If you think of `x` as a box, you are putting the number 5 inside that box.
+
+2. (blank line)
+   - This is just an empty line for better readability. It doesn't affect the code execution.
+
+3. `if x > 2:`
+   - This line checks if the value of `x` is greater than 2.
+   - Example: Since `x` is 5, which is greater than 2, this condition is true, so the code inside this `if` block will be executed.
+
+4. `    if x < 10:`
+   - This line is indented, meaning it is inside the previous `if` block. It checks if `x` is less than 10.
+   - Example: Since `x` is 5, which is less than 10, this condition is also true, so the code inside this `if` block will be executed.
+
+5. `        if x == 5:`
+   - This line is further indented, meaning it is inside the previous `if` block. It checks if `x` is equal to 5.
+   - Example: Since `x` is indeed 5, this condition is true, so the code inside this `if` block will be executed.
+
+6. `            print("x is = 5 that's true")`
+   - This line is inside the previous `if` block and will be executed if all the above conditions are true. It prints the message "x is = 5 that's true" to the console.
+   - Example: Since all conditions are true, the message "x is = 5 that's true" will be displayed.
+
+In summary, this code checks if `x` is greater than 2, less than 10, and equal to 5. If all these conditions are met, it prints a message confirming that `x` is indeed 5.

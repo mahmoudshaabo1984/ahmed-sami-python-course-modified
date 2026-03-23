@@ -1,0 +1,16 @@
+section 11 lesson 52 python code  tested
+
+
+
+# Data Science (This line is a comment, providing a general description of the script's purpose.)
+# Convert Text To CSV And Control Columns (This is another comment, detailing the specific task of the script.)
+# Import Pandas Tool (This comment explains the purpose of the following line.)
+import pandas # Imports the pandas library, which is essential for data manipulation.
+
+# print(dir(pandas)) # This line is commented out; it would print all attributes and methods of the pandas module.
+
+my_data = pandas.read_csv("Points.txt") # Reads data from a text file named "Points.txt" into a pandas DataFrame.
+# print(my_data) # This line is commented out; it would display the contents of the DataFrame.
+
+my_data.columns = ["Name", "Points", ] # Assigns new column names "Name" and "Points" to the DataFrame.
+my_data.to_csv("Points.csv", index=None) # Writes the DataFrame to a new CSV file named "Points.csv" without including the index column.

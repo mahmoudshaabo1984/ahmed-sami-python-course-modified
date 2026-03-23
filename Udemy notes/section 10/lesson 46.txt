@@ -1,0 +1,121 @@
+القسم 10: الدرس 46
+إضافة عناصر اللعبة - المضارب والكرة
+المحاضر: أحمد سامي
+
+المقدمة
+صباح الخير أيها الطلاب الأعزاء. مرحباً بكم في الدرس 46 من القسم 10. بعد أن أسسنا نافذة اللعبة في الدرس السابق، حان الوقت لإضفاء الحياة على لعبتنا بإضافة العناصر التفاعلية الأساسية: المضارب والكرة.
+في هذه المحاضرة، سنتعلم كيفية إنشاء كائنات اللعبة وتكوينها وتموضعها على الشاشة. سنستكشف مفاهيم مهمة مثل إنشاء كائنات Turtle، تخصيص أشكالها وألوانها، وتحديد مواقعها الدقيقة في فضاء اللعبة. هذه المهارات ستمكنكم من تحويل نافذة فارغة إلى بيئة لعب تفاعلية حقيقية.
+بنهاية هذا الدرس، ستفهمون بعمق كيفية بناء وتنظيم عناصر اللعبة المرئية، وستكونون جاهزين للخطوة التالية: إضافة الحركة والتفاعل لهذه العناصر.
+
+المحتوى الرئيسي
+الجزء الأول: إعداد البيئة الأساسية (الأسطر 1-7)
+السطر 1: import turtle
+نبدأ باستيراد مكتبة turtle للرسومات. هذه المكتبة توفر لنا الأدوات اللازمة لإنشاء العناصر المرئية والرسوم المتحركة في Python.
+السطر 2: wind = turtle.Screen()
+إنشاء نافذة اللعبة الرئيسية التي ستحتوي على جميع عناصر اللعبة. هذا الكائن wind سيكون المسرح الذي تتحرك عليه جميع عناصرنا.
+السطر 3: wind.title("Ping Pong By Codezilla")
+تعيين عنوان النافذة الذي يظهر في شريط العنوان، مما يعطي هوية واضحة للعبتنا.
+السطر 4: wind.bgcolor("black")
+تحديد اللون الأسود كخلفية للنافذة، مما يخلق تبايناً مثالياً مع العناصر البيضاء والملونة.
+السطر 5: wind.setup(width=800, height=600)
+تحديد أبعاد النافذة بعرض 800 بكسل وارتفاع 600 بكسل، مما يوفر مساحة لعب مناسبة.
+السطر 6: wind.tracer(0)
+تعطيل التحديث التلقائي للشاشة لتحسين الأداء والحصول على تحكم يدوي في معدل الإطارات.
+الجزء الثاني: إنشاء المضرب الأول - اللاعب الأيسر (الأسطر 8-14)
+السطر 8: madrab1 = turtle.Turtle()
+إنشاء كائن Turtle جديد للمضرب الأول. هذا الكائن سيمثل مضرب اللاعب الأيسر في اللعبة.
+السطر 9: madrab1.speed(0)
+تعيين سرعة الرسم إلى 0، وهي أسرع سرعة ممكنة. هذا يعني أن المضرب سيتحرك فورياً دون تأخير في الرسم المتحرك.
+السطر 10: madrab1.shape("square")
+تحديد الشكل الأساسي للمضرب كمربع. سنقوم بتحويل هذا المربع إلى مستطيل في السطر التالي.
+السطر 11: madrab1.color("blue")
+تلوين المضرب الأول باللون الأزرق لتمييزه عن المضرب الثاني وإضافة جمالية بصرية للعبة.
+السطر 12: madrab1.shapesize(stretch_wid=5, stretch_len=1)
+تحويل المربع إلى مستطيل عمودي بتمديد العرض 5 مرات والطول مرة واحدة. هذا يخلق شكل المضرب النموذجي للعبة Ping Pong.
+السطر 13: madrab1.penup()
+رفع القلم لمنع رسم خطوط عند تحريك المضرب. هذا ضروري لأننا نريد تحريك المضرب دون ترك أثر.
+السطر 14: madrab1.goto(-350, 0)
+وضع المضرب الأول على الجانب الأيسر من الشاشة عند الإحداثيات (x=-350, y=0)، مما يضعه في منتصف الارتفاع على الحافة اليسرى.
+الجزء الثالث: إنشاء المضرب الثاني - اللاعب الأيمن (الأسطر 16-22)
+السطر 16: madrab2 = turtle.Turtle()
+إنشاء كائن Turtle ثاني للمضرب الأيمن، مماثل للمضرب الأول ولكن للاعب الثاني.
+السطر 17: madrab2.speed(0)
+تعيين أسرع سرعة للرسم المتحرك، مطابقة للمضرب الأول لضمان الاستجابة الفورية.
+السطر 18: madrab2.shape("square")
+استخدام الشكل المربع كأساس، تماماً مثل المضرب الأول.
+السطر 19: madrab2.color("red")
+تلوين المضرب الثاني باللون الأحمر لتمييزه بصرياً عن المضرب الأزرق، مما يسهل على اللاعبين تتبع مضاربهم.
+السطر 20: madrab2.shapesize(stretch_wid=5, stretch_len=1)
+تطبيق نفس التحويل الهندسي لإنشاء شكل المضرب المستطيل.
+السطر 21: madrab2.penup()
+رفع القلم لمنع رسم المسارات أثناء الحركة.
+السطر 22: madrab2.goto(350, 0)
+وضع المضرب الثاني على الجانب الأيمن من الشاشة عند (x=350, y=0)، مقابل المضرب الأول تماماً.
+الجزء الرابع: إنشاء كرة اللعبة (الأسطر 24-29)
+السطر 24: madra2 = turtle.Turtle()
+إنشاء كائن Turtle للكرة. لاحظ أن الاسم madra2 قد يكون خطأ مطبعي والمقصود ball أو kora، لكننا سنستخدم الاسم الموجود في الكود.
+السطر 25: madra2.speed(0)
+تعيين أسرع سرعة للكرة لضمان حركة سلسة وسريعة الاستجابة.
+السطر 26: madra2.shape("square")
+استخدام الشكل المربع للكرة. بالحجم الافتراضي، يظهر المربع الصغير كشكل شبه دائري.
+السطر 27: madra2.color("white")
+تلوين الكرة باللون الأبيض لتوفير أقصى تباين مع الخلفية السوداء وضمان الرؤية الواضحة.
+السطر 28: madra2.penup()
+رفع القلم لمنع رسم مسار الكرة أثناء حركتها عبر الشاشة.
+السطر 29: madra2.goto(0, 0)
+وضع الكرة في مركز الشاشة عند نقطة الأصل (x=0, y=0)، وهو الموضع المثالي لبداية اللعبة.
+الجزء الخامس: حلقة اللعبة الرئيسية (الأسطر 31-32)
+السطر 31: while True:
+بدء الحلقة اللانهائية التي تحافظ على تشغيل اللعبة بشكل مستمر.
+السطر 32: wind.update()
+تحديث الشاشة يدوياً لعرض أي تغييرات في مواضع الكائنات. هذا التحديث اليدوي يعمل مع tracer(0) لتوفير تحكم دقيق في معدل الإطارات.
+
+الخاتمة
+في هذا الدرس، تقدمنا خطوة كبيرة في بناء لعبة Ping Pong الخاصة بنا. لقد تعلمنا كيفية إنشاء وتكوين كائنات اللعبة الأساسية: مضربين للاعبين وكرة للعب. كل كائن تم تخصيصه بعناية من حيث الشكل واللون والحجم والموضع.
+المفاهيم التي غطيناها اليوم - إنشاء كائنات Turtle المتعددة، تخصيص خصائصها، والتحكم في مواضعها - تشكل الأساس لأي لعبة ثنائية الأبعاد. لقد رأينا كيف يمكن لبضعة أسطر من الكود أن تحول نافذة فارغة إلى ملعب جاهز للعب.
+في الدرس القادم، سنضيف الحياة لهذه العناصر الساكنة من خلال تنفيذ دوال الحركة والتحكم باللوحة المفاتيح، مما سيمكن اللاعبين من التحكم في المضارب وبدء حركة الكرة. استمروا في التدريب والتجربة، وتذكروا أن كل لعبة عظيمة بدأت بعناصر بسيطة مثل التي أنشأناها اليوم.
+أشجعكم على تجربة تغيير الألوان والأحجام والمواضع لفهم أعمق لكيفية تأثير كل معامل على مظهر اللعبة. الممارسة والتجربة هما مفتاح الإتقان في برمجة الألعاب.
+
+كود Python المختبر
+pythonDownloadCopy code Wrapimport turtle  # Import turtle graphics library for creating visual elements and animations
+
+wind = turtle.Screen()  # Create the main game window where all game objects will be displayed
+
+wind.title("Ping Pong By Codezilla")  # Set the text that appears in the window's title bar
+
+wind.bgcolor("black")  # Set the window's background color to black for a classic game look
+
+wind.setup(width=800, height=600)  # Define window dimensions: 800 pixels wide by 600 pixels tall
+
+wind.tracer(0)  # Turn off automatic screen updates for manual control and better performance
+
+# First paddle (left player)
+madrab1 = turtle.Turtle()  # Create a turtle object that will become the left paddle
+madrab1.speed(0)  # Set animation speed to fastest (0 = no animation delay)
+madrab1.shape("square")  # Use square as the base shape for the paddle
+madrab1.color("blue")  # Color the left paddle blue
+madrab1.shapesize(stretch_wid=5, stretch_len=1)  # Transform square into a 5x1 rectangle (paddle shape)
+madrab1.penup()  # Lift the pen to prevent drawing lines when moving
+madrab1.goto(-350, 0)  # Position paddle on the left side of screen at x=-350, y=0
+
+# Second paddle (right player)
+madrab2 = turtle.Turtle()  # Create a turtle object that will become the right paddle
+madrab2.speed(0)  # Set animation speed to fastest (0 = no animation delay)
+madrab2.shape("square")  # Use square as the base shape for the paddle
+madrab2.color("red")  # Color the right paddle red
+madrab2.shapesize(stretch_wid=5, stretch_len=1)  # Transform square into a 5x1 rectangle (paddle shape)
+madrab2.penup()  # Lift the pen to prevent drawing lines when moving
+madrab2.goto(350, 0)  # Position paddle on the right side of screen at x=350, y=0
+
+# Game ball
+madra2 = turtle.Turtle()  # Create a turtle object that will be the game ball
+madra2.speed(0)  # Set animation speed to fastest for smooth ball movement
+madra2.shape("square")  # Use square shape (appears circular at default size)
+madra2.color("white")  # Color the ball white for visibility against black background
+madra2.penup()  # Lift the pen to prevent drawing lines when moving
+madra2.goto(0, 0)  # Start the ball at the center of the screen (x=0, y=0)
+
+while True:  # Main game loop - runs forever to keep the game active
+    wind.update()  # Refresh the screen to show any changes in object positions
+
+نهاية الدرس 46

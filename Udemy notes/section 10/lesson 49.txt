@@ -1,0 +1,206 @@
+القسم 10: الدرس 49
+تنفيذ اكتشاف التصادم بين المضرب والكرة
+المحاضر: أحمد سامي
+
+المقدمة
+صباح الخير أيها الطلاب الأعزاء. مرحباً بكم في الدرس 49 من القسم 10. اليوم يمثل علامة فارقة حاسمة في تطوير لعبة Ping Pong الخاصة بنا حيث سننفذ اكتشاف التصادم بين المضرب والكرة. هذه الوظيفة تحول لعبتنا من رسوم متحركة بسيطة إلى تجربة تفاعلية قابلة للعب بالكامل حيث يمكن للاعبين فعلياً ضرب الكرة وإعادة توجيهها.
+في هذه المحاضرة، سنستكشف الرياضيات والمنطق وراء اكتشاف التصادم بين الكائنات المستطيلة. سنتعلم كيفية تحديد متى يتقاطع كائنان في اللعبة وكيفية الاستجابة بشكل مناسب لإنشاء ميكانيكيات لعب واقعية. تقنيات اكتشاف التصادم هذه أساسية لكل لعبة فيديو تم إنشاؤها تقريباً.
+بنهاية هذا الدرس، ستفهمون كيفية اكتشاف التصادمات بين الكائنات المتحركة، وحساب حدود التصادم، وتنفيذ الاستجابات الفيزيائية المناسبة. هذه المعرفة تمثل القطعة الأخيرة المطلوبة لإكمال لعبة Ping Pong الوظيفية الخاصة بنا.
+
+المحتوى الرئيسي
+الجزء الأول: مراجعة الكود الأساسي (الأسطر 1-91)
+الأسطر الـ 91 الأولى من الكود تبقى بدون تغيير من الدرس السابق. لدينا إعداد النافذة، وإنشاء المضارب، وتهيئة الكرة مع مكونات السرعة، ودوال الحركة، وروابط لوحة المفاتيح، واكتشاف التصادم مع الحدود. هذا الأساس الموجود يوفر الإطار الذي سنضيف عليه نظام تصادم المضرب.
+الجزء الثاني: فهم نظرية اكتشاف التصادم
+قبل فحص الكود، دعونا نفهم مفهوم اكتشاف التصادم. لكي تتصادم الكرة مع المضرب، يجب تحقق شرطين في وقت واحد:
+
+1. التداخل الأفقي: يجب أن تكون الكرة في نفس الموضع الأفقي للمضرب
+2. التداخل العمودي: يجب أن تكون الكرة ضمن النطاق العمودي للمضرب
+
+هذا يُعرف باكتشاف التصادم بصندوق الحدود المحاذي للمحاور (AABB)، وهو أحد أكثر الطرق كفاءة لاكتشاف التصادمات بين الكائنات المستطيلة.
+الجزء الثالث: اكتشاف التصادم مع المضرب الأيسر (الأسطر 93-96)
+السطر 93-94: فحص شرط التصادم
+pythonDownloadCopy code Wrapif (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() < madrab1.ycor() + 40 and ball.ycor() > madrab1.ycor() - 40):
+هذه العبارة الشرطية المعقدة تفحص التصادم مع المضرب الأيسر (madrab1). دعونا نفككها:
+الفحص الأفقي: (ball.xcor() < -340 and ball.xcor() > -350)
+
+* المضرب الأيسر موضوع عند x=-350
+* نفحص إذا كانت الكرة بين x=-350 و x=-340
+* هذا النطاق البالغ 10 بكسل يمثل منطقة ضرب المضرب
+* يجب أن تكون الكرة قادمة من اليمين (x > -350) ولكن لم تتجاوز المضرب (x < -340)
+
+الفحص العمودي: (ball.ycor() < madrab1.ycor() + 40 and ball.ycor() > madrab1.ycor() - 40)
+
+* madrab1.ycor() يعطي إحداثي y لمركز المضرب
+* نضيف ونطرح 40 بكسل لإنشاء منطقة ضرب عمودية بطول 80 بكسل
+* هذا يأخذ في الاعتبار ارتفاع المضرب (ممدد إلى 5 أضعاف المربع الافتراضي 20 بكسل = 100 بكسل)
+* النطاق البالغ 40 بكسل على كل جانب يوفر منطقة تصادم معقولة
+
+السطر 95: ball.setx(-340)
+عند اكتشاف التصادم، نضع الكرة فوراً عند x=-340. هذا يمنع الكرة من الاختراق عبر المضرب أو الانحشار داخله. هذه التقنية، المسماة "تصحيح الموضع"، ضرورية لفيزياء تصادم مستقرة.
+السطر 96: ball.dx *= -1
+نعكس السرعة الأفقية للكرة، مما يجعلها ترتد باتجاه الجانب المقابل. الضرب في -1 يحافظ على مقدار السرعة مع عكس الاتجاه.
+الجزء الرابع: اكتشاف التصادم مع المضرب الأيمن (الأسطر 98-101)
+السطر 98-99: فحص شرط التصادم
+pythonDownloadCopy code Wrapif (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < madrab2.ycor() + 40 and ball.ycor() > madrab2.ycor() - 40):
+هذا يعكس تصادم المضرب الأيسر ولكن مع إحداثيات معدلة:
+الفحص الأفقي: (ball.xcor() > 340 and ball.xcor() < 350)
+
+* المضرب الأيمن موضوع عند x=350
+* نفحص إذا كانت الكرة بين x=340 و x=350
+* يجب أن تكون الكرة قادمة من اليسار (x < 350) ولكن لم تتجاوز المضرب (x > 340)
+
+الفحص العمودي: (ball.ycor() < madrab2.ycor() + 40 and ball.ycor() > madrab2.ycor() - 40)
+
+* منطق مطابق للمضرب الأيسر
+* ينشئ منطقة ضرب عمودية بطول 80 بكسل متمركزة على المضرب
+
+السطر 100: ball.setx(340)
+يضع الكرة عند x=340 عند التصادم، مانعاً الاختراق ومضمناً ارتدادات نظيفة.
+السطر 101: ball.dx *= -1
+يعكس السرعة الأفقية لإرسال الكرة مرة أخرى نحو الجانب الأيسر.
+الجزء الخامس: اعتبارات تحسين اكتشاف التصادم
+التنفيذ الحالي يستخدم حدود تصادم ثابتة، وهو ما يعمل بشكل جيد للعبتنا البسيطة. ومع ذلك، هناك عدة اعتبارات مهمة:
+
+1. 
+دقة حجم المضرب: النطاق العمودي البالغ 40 بكسل أقل قليلاً من الارتفاع الفعلي للمضرب (50 بكسل من المركز)، مما يوفر منطقة ضرب أكثر واقعية تتطلب الدقة.
+
+2. 
+الاعتماد على معدل الإطارات: عند السرعات العالية جداً، قد تمر الكرة عبر المضرب بين الإطارات. إعدادات السرعة الحالية لدينا تمنع هذه المشكلة.
+
+3. 
+الحالات الحدية: تصحيح الموضع (setx) يضمن عدم انحشار الكرة داخل المضرب حتى لو حدث اكتشاف التصادم متأخراً.
+
+
+
+الخاتمة
+لقد أكمل درس اليوم ميكانيكيات اللعب الأساسية للعبة Ping Pong الخاصة بنا. لقد نجحنا في تنفيذ اكتشاف التصادم بين المضرب والكرة، مما يمكّن اللاعبين من التفاعل مع الكرة ولعب لعبة فعلية. نظام اكتشاف التصادم الذي بنيناه يوضح مفاهيم أساسية قابلة للتطبيق في سيناريوهات تطوير ألعاب لا حصر لها.
+المفاهيم الرئيسية التي أتقناها اليوم تشمل:
+
+1. اكتشاف التصادم بصندوق الحدود المحاذي للمحاور (AABB)
+2. المنطق الشرطي المركب لفحص الشروط المتزامنة
+3. تصحيح الموضع لمنع اختراق الكائنات
+4. عكس السرعة لفيزياء ارتداد واقعية
+
+لعبة Ping Pong الخاصة بنا الآن تتضمن:
+
+* تحكمات مضرب استجابية
+* حركة كرة سلسة
+* تصادم مع الحدود مع الارتداد
+* اكتشاف تصادم المضرب مع إعادة توجيه الكرة
+
+في دروس مستقبلية، يمكننا تحسين هذه اللعبة بإضافة:
+
+* تتبع وعرض النقاط
+* زيادة سرعة الكرة مع الوقت
+* مؤثرات صوتية للتصادمات
+* تأثيرات حافة المضرب لزوايا كرة متنوعة
+* خصوم ذكاء اصطناعي
+
+أشجعكم على التجربة مع حدود التصادم، وتجربة أحجام مضارب مختلفة، ومراقبة كيف تؤثر هذه التغييرات على اللعب. فهم اكتشاف التصادم أمر بالغ الأهمية لأي مطور ألعاب طموح، حيث يشكل أساس تجارب الألعاب التفاعلية.
+
+كود Python المختبر
+pythonDownloadCopy code Wrapimport turtle  # Import the turtle graphics library
+import time    # Import the time module to pause the game loop
+
+wind = turtle.Screen()  # Create a window/screen object for the game
+wind.title("Ping Pong By Codezilla")  # Set the window title
+wind.bgcolor("black")   # Set the background color to black
+wind.setup(width=800, height=600)  # Set window dimensions: 800 pixels wide, 600 pixels high
+wind.tracer(0)        # Turn off automatic screen updates for better performance
+
+# madrab1
+madrab1 = turtle.Turtle()  # Create a turtle object for the first paddle
+madrab1.speed(0)           # Set animation speed to maximum (0 = fastest)
+madrab1.shape("square")    # Set the shape to square
+madrab1.color("blue")      # Set the color to blue
+madrab1.shapesize(stretch_wid=5, stretch_len=1)  # Stretch the square: 5x height, 1x width
+madrab1.penup()            # Lift the pen to avoid drawing lines when moving
+madrab1.goto(-350, 0)      # Position the paddle at x=-350, y=0 (left side)
+
+# madrab2
+madrab2 = turtle.Turtle()  # Create a turtle object for the second paddle
+madrab2.speed(0)           # Set animation speed to maximum
+madrab2.shape("square")    # Set the shape to square
+madrab2.color("red")       # Set the color to red
+madrab2.shapesize(stretch_wid=5, stretch_len=1)  # Stretch the square: 5x height, 1x width
+madrab2.penup()            # Lift the pen to avoid drawing lines
+madrab2.goto(350, 0)       # Position the paddle at x=350, y=0 (right side)
+
+# ball
+ball = turtle.Turtle()     # Create a turtle object for the ball
+ball.speed(0)              # Set animation speed to maximum
+ball.shape("square")       # Set the shape to square
+ball.color("white")        # Set the color to white
+ball.penup()               # Lift the pen to avoid drawing lines
+ball.goto(0, 0)            # Position the ball at center (x=0, y=0)
+ball.dx = 1.5              # Set ball's horizontal speed (pixels per frame)
+ball.dy = 1.5              # Set ball's vertical speed (pixels per frame)
+
+# functions
+def madrab1_up():  # Define function to move madrab1 up
+    y = madrab1.ycor()  # Get the current y coordinate of madrab1
+    y += 20             # Increase y by 20 pixels
+    madrab1.sety(y)     # Set madrab1's new y position
+
+def madrab1_down():# Define function to move madrab1 down
+    y = madrab1.ycor()  # Get the current y coordinate of madrab1
+    y -= 20             # Decrease y by 20 pixels
+    madrab1.sety(y)     # Set madrab1's new y position
+
+def madrab2_up():  # Define function to move madrab2 up
+    y = madrab2.ycor()  # Get the current y coordinate of madrab2
+    y += 20             # Increase y by 20 pixels
+    madrab2.sety(y)     # Set madrab2's new y position
+
+def madrab2_down():# Define function to move madrab2 down
+    y = madrab2.ycor()  # Get the current y coordinate of madrab2
+    y -= 20             # Decrease y by 20 pixels
+    madrab2.sety(y)     # Set madrab2's new y position
+
+# keyboard bindings
+wind.listen()  # Tell the window to listen for keyboard input
+wind.onkeypress(madrab1_up, "w")      # When 'w' key is pressed, call madrab1_up function
+wind.onkeypress(madrab1_down, "s")    # When 's' key is pressed, call madrab1_down function
+wind.onkeypress(madrab2_up, "Up")     # When 'Up' arrow key is pressed, call madrab2_up function
+wind.onkeypress(madrab2_down, "Down") # When 'Down' arrow key is pressed, call madrab2_down function
+
+# main game loop
+while True:  # Infinite loop to keep the game running
+    wind.update()  # Update the screen with any changes
+    time.sleep(0.01) # Pause the loop for a short time to control the game speed
+
+    # move the ball
+    ball.setx(ball.xcor() + ball.dx)  # Move ball horizontally: current x position + dx
+    ball.sety(ball.ycor() + ball.dy)  # Move ball vertically: current y position + dy
+
+    # border check
+    if ball.ycor() > 290:   # Check if ball hit the top border (y > 290)
+        ball.sety(290)      # Keep ball at the border position
+        ball.dy *= -1       # Reverse vertical direction (bounce)
+
+    if ball.ycor() < -290:  # Check if ball hit the bottom border (y < -290)
+        ball.sety(-290)     # Keep ball at the border position
+        ball.dy *= -1       # Reverse vertical direction (bounce)
+
+    if ball.xcor() > 390:   # Check if ball passed the right border (missed by player 2)
+        ball.goto(0, 0)     # Reset ball to center position
+        ball.dx *= -1       # Reverse horizontal direction
+
+    if ball.xcor() < -390:  # Check if ball passed the left border (missed by player 1)
+        ball.goto(0, 0)     # Reset ball to center position
+        ball.dx *= -1       # Reverse horizontal direction
+
+
+    # Check for collision with the left paddle (madrab1).
+    # It checks if the ball is within the horizontal and vertical range of the paddle.
+    if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() < madrab1.ycor() + 40 and ball.ycor() > madrab1.ycor() - 40):
+        ball.setx(-340)     # Move the ball to the paddle's surface to prevent it from getting stuck
+        ball.dx *= -1       # Reverse the ball's horizontal direction to make it bounce
+
+    # Check for collision with the right paddle (madrab2).
+    # It checks if the ball is within the horizontal and vertical range of the paddle.
+    if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < madrab2.ycor() + 40 and ball.ycor() > madrab2.ycor() - 40):
+        ball.setx(340)      # Move the ball to the paddle's surface to prevent it from getting stuck
+        ball.dx *= -1       # Reverse the ball's horizontal direction to make it bounce
+
+نهاية الدرس 49

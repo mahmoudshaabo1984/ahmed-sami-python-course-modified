@@ -1,0 +1,123 @@
+import turtle  # Import the turtle graphics library
+import time    # Import the time module to pause the game loop
+
+# Create a window (screen) object
+wind = turtle.Screen()                 # Create a window/screen object for the game
+wind.title("Ping Pong By Codezilla")   # Set the window title
+wind.bgcolor("black")                  # Set the background color to black
+wind.setup(width=800, height=600)      # Set window dimensions: 800 pixels wide, 600 pixels high
+wind.tracer(0)                         # Turn off automatic screen updates for better performance
+
+# madrab1 (Left Paddle)
+madrab1 = turtle.Turtle()              # Create a turtle object for the first paddle
+madrab1.speed(0)                       # Set animation speed to maximum (0 = fastest)
+madrab1.shape("square")                # Set the shape to square
+madrab1.color("blue")                  # Set the color to blue
+madrab1.shapesize(stretch_wid=5, stretch_len=1) # Stretch the square to form a paddle
+madrab1.penup()                        # Lift the pen to avoid drawing lines when moving
+madrab1.goto(-350, 0)                  # Position the paddle on the left side
+
+# madrab2 (Right Paddle)
+madrab2 = turtle.Turtle()              # Create a turtle object for the second paddle
+madrab2.speed(0)                       # Set animation speed to maximum
+madrab2.shape("square")                # Set the shape to square
+madrab2.color("red")                   # Set the color to red
+madrab2.shapesize(stretch_wid=5, stretch_len=1) # Stretch the square to form a paddle
+madrab2.penup()                        # Lift the pen to avoid drawing lines
+madrab2.goto(350, 0)                   # Position the paddle on the right side
+
+# ball
+ball = turtle.Turtle()                 # Create a turtle object for the ball
+ball.speed(0)                          # Set animation speed to maximum
+ball.shape("square")                   # Set the shape to square
+ball.color("white")                    # Set the color to white
+ball.penup()                           # Lift the pen to avoid drawing lines
+ball.goto(0, 0)                        # Position the ball at the center
+ball.dx = 1.5                          # Set ball's horizontal speed (pixels per frame)
+ball.dy = 1.5                          # Set ball's vertical speed (pixels per frame)
+
+# Score
+score1 = 0                             # Variable to store player 1's score
+sscore2 = 0                             # Variable to store player 2's score
+score = turtle.Turtle()                # Create a turtle object for the scoreboard
+score.speed(0)                         # Set animation speed to maximum
+score.color("white")                   # Set the text color to white
+score.penup()                          # Lift the pen to avoid drawing lines
+score.hideturtle()                     # Hide the turtle object, we only need the text
+score.goto(0, 260)                     # Position the scoreboard at the top center
+# Write the initial score on the screen
+score.write("Player 1: 0 Player 2: 0", align="center", font=("Courier", 24, "normal"))
+
+# functions
+def madrab1_up():                  # Define function to move madrab1 up
+    y = madrab1.ycor()             # Get the current y coordinate of madrab1
+    y += 20                        # Increase y by 20 pixels
+    madrab1.sety(y)                # Set madrab1's new y position
+
+def madrab1_down():                # Define function to move madrab1 down
+    y = madrab1.ycor()             # Get the current y coordinate of madrab1
+    y -= 20                        # Decrease y by 20 pixels
+    madrab1.sety(y)                # Set madrab1's new y position
+
+def madrab2_up():                  # Define function to move madrab2 up
+    y = madrab2.ycor()             # Get the current y coordinate of madrab2
+    y += 20                        # Increase y by 20 pixels
+    madrab2.sety(y)                # Set madrab2's new y position
+
+def madrab2_down():                # Define function to move madrab2 down
+    y = madrab2.ycor()             # Get the current y coordinate of madrab2
+    y -= 20                        # Decrease y by 20 pixels
+    madrab2.sety(y)                # Set madrab2's new y position
+
+# keyboard bindings
+wind.listen()                      # Tell the window to listen for keyboard input
+wind.onkeypress(madrab1_up, "w")      # When 'w' key is pressed, call madrab1_up function
+wind.onkeypress(madrab1_down, "s")    # When 's' key is pressed, call madrab1_down function
+wind.onkeypress(madrab2_up, "Up")     # When 'Up' arrow key is pressed, call madrab2_up function
+wind.onkeypress(madrab2_down, "Down") # When 'Down' arrow key is pressed, call madrab2_down function
+
+# main game loop
+while True:                        # Infinite loop to keep the game running
+    wind.update()                  # Update the screen with any changes
+    time.sleep(0.01)               # Pause the loop for a short time to control the game speed
+
+    # move the ball
+    ball.setx(ball.xcor() + ball.dx) # Move ball horizontally based on its dx value
+    ball.sety(ball.ycor() + ball.dy) # Move ball vertically based on its dy value
+
+    # border checking
+    if ball.ycor() > 290:          # Check if ball hit the top border
+        ball.sety(290)             # Keep ball at the border position
+        ball.dy *= -1              # Reverse vertical direction (bounce)
+
+    if ball.ycor() < -290:         # Check if ball hit the bottom border
+        ball.sety(-290)            # Keep ball at the border position
+        ball.dy *= -1              # Reverse vertical direction (bounce)
+
+    if ball.xcor() > 390:          # Check if ball passed the right border (Player 1 scores)
+        ball.goto(0, 0)            # Reset ball to center position
+        ball.dx *= -1              # Reverse horizontal direction for the next round
+        score1 += 1                # Add a point to Player 1
+        score.clear()              # Clear the old score from the screen
+        # Update the score display with the new scores
+        score.write(f"Player 1: {score1} Player 2: {score2}", align="center", font=("Courier", 24, "normal"))
+
+    if ball.xcor() < -390:         # Check if ball passed the left border (Player 2 scores)
+        ball.goto(0, 0)            # Reset ball to center position
+        ball.dx *= -1              # Reverse horizontal direction for the next round
+        score2 += 1                # Add a point to Player 2
+        score.clear()              # Clear the old score from the screen
+        # Update the score display with the new scores
+        score.write(f"Player 1: {score1} Player 2: {score2}", align="center", font=("Courier", 24, "normal"))
+
+    # Check for collision with the right paddle (madrab2).
+    # It checks if the ball is within the horizontal and vertical range of the paddle.
+    if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < madrab2.ycor() + 40 and ball.ycor() > madrab2.ycor() - 40):
+        ball.setx(340)             # Move the ball to the paddle's surface to prevent it from getting stuck
+        ball.dx *= -1              # Reverse the ball's horizontal direction to make it bounce
+
+    # Check for collision with the left paddle (madrab1).
+    # It checks if the ball is within the horizontal and vertical range of the paddle.
+    if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() < madrab1.ycor() + 40 and ball.ycor() > madrab1.ycor() - 40):
+        ball.setx(-340)            # Move the ball to the paddle's surface to prevent it from getting stuck
+        ball.dx *= -1              # Reverse the ball's horizontal direction to make it bounce

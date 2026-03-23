@@ -1,0 +1,2 @@
+print("besem allah")
+

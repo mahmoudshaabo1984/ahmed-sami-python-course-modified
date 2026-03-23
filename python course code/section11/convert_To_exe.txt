@@ -1,0 +1,6 @@
+pip install pyinstaller
+pyinstaller -w --onefile calckAge.py
+
+
+
+

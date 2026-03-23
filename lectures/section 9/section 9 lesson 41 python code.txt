@@ -1,0 +1,7 @@
+section 9 lesson 41 python code
+
+pip 
+python --version
+if you are on windows 10
+py --version
+pip --version

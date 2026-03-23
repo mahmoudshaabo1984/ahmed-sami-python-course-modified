@@ -1,0 +1,13 @@
+section 11 lesson 52 Points
+
+Name, Points  
+Osama, 100  
+Ahmed, 120  
+Sayed, 320  
+Mahmoud, 40  
+Ali, 90  
+Sameh, 500  
+Eman, 300  
+Saleh, 300  
+
+

@@ -1,0 +1,23 @@
+
+
+
+
+
+
+
+
+
+# Data Science
+# Convert Text To CSV And Control Columns
+# Import Pandas Tool
+import pandas 
+
+# print(dir(pandas))
+
+
+my_data = pandas.read_csv("Points.txt")
+# print(my_data)
+
+
+my_data.columns = ["Name", "Points", ]
+my_data.to_csv("Points.csv", index=None)

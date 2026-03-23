@@ -1,0 +1,4 @@
+name = input("please inter your name")
+ae = input("your age")
+print("hi " + name)
+print("and your age is " + age)

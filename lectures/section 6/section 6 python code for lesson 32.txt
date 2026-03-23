@@ -1,0 +1,69 @@
+section 6 python code for lesson 32
+
+# == : Checks if two values are equal
+# > : Checks if the left value is greater than the right value
+# < : Checks if the left value is less than the right value
+# >= : Checks if the left value is greater than or equal to the right value
+# <= : Checks if the left value is less than or equal to the right value
+# != : Checks if two values are not equal
+
+
+# and combines two conditions
+x = 5
+y = 10
+if x > 2 and x < 10:
+    print("True ")
+
+
+# or allows the code to execute if at least one of the conditions is true
+x = 5
+y = 10
+if x > 2 or x <= 10:
+    print("true")
+	
+	
+	
+	# not inverts the condition, making it true if the original condition is false
+# using not
+x = 5
+y = 10
+if not(x ==y):
+    print("false")
+
+
+
+
+# in checks if an element is present within a sequence
+# using in 
+name = "ahmed"
+if "h" in name:
+    print("h in name")
+
+
+
+
+# not in checks if an element is not present within a sequence
+# using not in 
+name = "ahmed"
+if "s" not in name:
+    print("not in")
+	
+	
+	
+	
+	# is checks if two variables point to the same object in memory
+# using is
+x = 5
+y = 10
+if x is y:
+    print("true")
+
+
+# is not checks if two variables do not point to the same object in memory
+# using is not
+x = 5
+y = 10
+if x is not y:
+    print("x is not y")
+	
+	

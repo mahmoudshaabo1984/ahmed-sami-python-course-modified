@@ -1,0 +1,49 @@
+s = "hello world"
+
+# print(s)
+
+# length
+print(len(s))
+
+# capitalize
+print(s.capitalize())
+
+# upper case
+print(s.upper())
+
+# lower case
+print(s.lower())
+
+# swipe case
+print(s.swapcase())
+
+# replace
+print(s.replace("world", "everyone"))
+
+# count character
+char = "l"
+print(s.count(char))
+
+# startswith
+print(s.startswith("he"))
+
+# endswith
+print(s.endswith("s"))
+
+# split
+print(s.split())
+
+# find
+print(s.find("d"))
+
+
+
+
+# Is all alphanumeric
+print(s.isalnum())
+
+# Is all alphabetic
+print(s.isalpha())
+
+# Is all numeric
+print(s.isnumeric())

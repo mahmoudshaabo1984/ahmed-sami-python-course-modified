@@ -1,0 +1,22 @@
+
+
+
+
+
+from tkinter import * # Imports all modules from the tkinter library.
+
+age_app = Tk() # Creates the main application window.
+
+age_app.title("Calculate Your Age") # Sets the title of the application window.
+
+age_app.geometry("400x200") # Sets the dimensions of the window (width x height).
+
+the_text = Label(age_app, text="Write Your Age", height=2, font=("Arial", 20)) # Creates a text label widget.
+
+the_text.pack() # Places the label widget into the main window.
+
+age = StringVar() # Creates a special tkinter variable to hold a string.
+
+age.set("00") # Sets the default value for the 'age' variable.
+
+age_app.mainloop() # Runs the application's event loop to keep it open and responsive.

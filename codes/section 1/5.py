@@ -1,0 +1,5 @@
+print("my name is Mahmoud Shaabo")
+print("I am 40 years old")
+                print("I am a python student")
+print("my youtube channil is https://www.youtube.com/channel/UCnsIqvyI4qd-3WvRxkdcuzQ")    
+print("my emailis obscureman999@gmail.com")

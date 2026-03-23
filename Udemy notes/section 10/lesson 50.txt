@@ -1,0 +1,234 @@
+القسم 10: الدرس 50
+تنفيذ نظام تسجيل النقاط في لعبة Ping Pong
+المحاضر: أحمد سامي
+
+المقدمة
+صباح الخير أيها الطلاب الأعزاء. مرحباً بكم في الدرس 50 من القسم 10. في هذا الدرس النهائي من سلسلتنا الأساسية، سنكمل البنية التحتية للعبة Ping Pong الخاصة بنا من خلال تنفيذ نظام تسجيل النقاط في الوقت الفعلي. هذا النظام سيتتبع النقاط، ويحدث الشاشة ديناميكياً، ويخبر اللاعبين عندما يسجلون.
+سنركز اليوم على:
+
+1. إدارة بيانات النقاط: كيفية تخزين وتحديث نقاط اللاعبين باستخدام المتغيرات
+2. عرض النقاط الرسومي: عرض النص على الشاشة عبر كائن turtle مخصص
+3. منطق التسجيل المتكامل: ربط حركة الكرة بأحداث التسجيل
+4. ممارسات الكود النظيف: ضمان تحديث لوحة النقاط بسلاسة وكفاءة
+
+بنهاية هذا الدرس، ستكافئ لعبتكم اللاعبين بالكامل على الدفاع الناجح وتوفر عرضاً واضحاً لتقدمهم.
+
+المحتوى الرئيسي
+الجزء الأول: إعداد نظام تتبع النقاط (الأسطر 39-48)
+السطر 39: score1 = 0
+هذا السطر ينشئ متغير عدد صحيح يُسمى score1 ويهيئه بالقيمة صفر. هذا المتغير سيخزن نقاط اللاعب الأول (اللاعب الأيسر) طوال اللعبة.
+السطر 40: score2 = 0
+بالمثل، ننشئ متغير score2 لتخزين نقاط اللاعب الثاني (اللاعب الأيمن). البدء بالصفر يضمن أن كلا اللاعبين يبدآن متساويين.
+السطر 41: score = turtle.Turtle()
+ننشئ كائن turtle جديد مخصص لعرض النقاط. هذا الكائن منفصل عن المضارب والكرة، مما يسمح بتحكم مستقل في عرض النص.
+السطر 42: score.speed(0)
+نضبط سرعة الرسوم المتحركة للحد الأقصى لضمان تحديثات فورية للنص.
+السطر 43: score.color("white")
+نضبط لون النص إلى الأبيض ليكون مرئياً بوضوح على الخلفية السوداء.
+السطر 44: score.penup()
+نرفع القلم لمنع رسم خطوط عند تحريك كائن النقاط.
+السطر 45: score.hideturtle()
+هذا السطر حاسم - يخفي شكل السلحفاة نفسها، تاركاً النص فقط مرئياً. لا نريد رؤية مؤشر السلحفاة، فقط النص المعروض.
+السطر 46: score.goto(0, 260)
+نضع كائن النقاط في الجزء العلوي من الشاشة (y=260) وفي المنتصف أفقياً (x=0). هذا الموضع يضمن رؤية النقاط دون التداخل مع منطقة اللعب.
+السطر 47-48: score.write("Player 1: 0 Player 2: 0", align="center", font=("Courier", 24, "normal"))
+نكتب النقاط الأولية على الشاشة:
+
+* النص الأولي يعرض "Player 1: 0 Player 2: 0"
+* align="center" يجعل النص متمركزاً حول نقطة الموضع
+* font=("Courier", 24, "normal") يستخدم خط Courier بحجم 24 نقطة ووزن عادي
+
+الجزء الثاني: منطق التسجيل في حلقة اللعبة الرئيسية (الأسطر 93-108)
+الأسطر 93-98: التسجيل عندما تتجاوز الكرة الحد الأيمن
+pythonDownloadCopy code Wrapif ball.xcor() > 390:          # فحص إذا تجاوزت الكرة الحد الأيمن
+    ball.goto(0, 0)            # إعادة الكرة إلى المركز
+    ball.dx *= -1              # عكس الاتجاه الأفقي للإرسال التالي
+    score1 += 1                # إضافة نقطة للاعب الأول
+    score.clear()              # مسح النص القديم من الشاشة
+    score.write(f"Player 1: {score1} Player 2: {score2}", align="center", font=("Courier", 24, "normal"))
+دعونا نفحص كل سطر:
+السطر 93: يفحص إذا كان موضع x للكرة أكبر من 390، مما يعني أن اللاعب الثاني فشل في صد الكرة
+السطر 94: يعيد الكرة إلى نقطة البداية في المركز (0, 0)
+السطر 95: يعكس اتجاه الكرة الأفقي حتى تتجه نحو اللاعب الذي سجل في الإرسال التالي
+السطر 96: يزيد نقاط اللاعب الأول بمقدار 1 باستخدام عامل الزيادة +=
+السطر 97: يمسح النص القديم للنقاط. هذا ضروري لمنع تداخل النصوص
+السطر 98: يكتب النقاط المحدثة باستخدام f-string التي تدمج قيم المتغيرات score1 و score2 مباشرة في النص
+الأسطر 100-105: التسجيل عندما تتجاوز الكرة الحد الأيسر
+pythonDownloadCopy code Wrapif ball.xcor() < -390:         # فحص إذا تجاوزت الكرة الحد الأيسر
+    ball.goto(0, 0)            # إعادة الكرة إلى المركز
+    ball.dx *= -1              # عكس الاتجاه الأفقي
+    score2 += 1                # إضافة نقطة للاعب الثاني
+    score.clear()              # مسح النص القديم
+    score.write(f"Player 1: {score1} Player 2: {score2}", align="center", font=("Courier", 24, "normal"))
+المنطق مطابق للحد الأيمن، لكن هنا:
+
+* السطر 103: يزيد نقاط اللاعب الثاني بدلاً من الأول
+* باقي الأسطر تتبع نفس النمط: إعادة تعيين، عكس، مسح، وإعادة كتابة
+
+الجزء الثالث: تقنيات البرمجة المستخدمة
+استخدام f-strings:
+السطر f"Player 1: {score1} Player 2: {score2}" يستخدم f-string، وهي ميزة حديثة في Python تسمح بدمج المتغيرات مباشرة في النص. الأقواس المنحنية {} تحتوي على المتغيرات التي ستُستبدل بقيمها الفعلية.
+أهمية clear() قبل write():
+استدعاء score.clear() قبل كل score.write() يضمن:
+
+* عدم تراكم النصوص فوق بعضها
+* وضوح العرض
+* عدم استهلاك ذاكرة إضافية بنصوص متراكمة
+
+التكامل مع منطق اللعبة:
+نظام النقاط متكامل بسلاسة مع:
+
+* فحص الحدود (عندما تفوت الكرة أحد اللاعبين)
+* إعادة تعيين الكرة (للإرسال التالي)
+* عكس الاتجاه (لإعطاء الإرسال للاعب الآخر)
+
+
+الخاتمة
+لقد أكملنا اليوم الميزة الأخيرة الأساسية للعبة Ping Pong! لقد نجحنا في:
+
+1. تنفيذ نظام نقاط ديناميكي: يتم تحديث النقاط فوراً عند كل هدف
+2. إنشاء عرض نظيف للنقاط: باستخدام تقنيات المسح وإعادة الكتابة
+3. دمج التسجيل مع منطق اللعبة: ربط أحداث التسجيل بحركة الكرة
+4. استخدام أفضل الممارسات البرمجية: مثل f-strings والمتغيرات المنظمة
+
+لعبتكم الآن توفر تجربة تنافسية كاملة. يمكن للاعبين التنافس، وتتبع النقاط، والاستمتاع بلعبة حقيقية.
+التحسينات المستقبلية المحتملة:
+
+* إضافة حد للفوز (مثلاً أول من يصل إلى 10 نقاط)
+* إضافة مؤثرات صوتية عند التسجيل
+* إضافة شاشة "انتهت اللعبة" مع إعلان الفائز
+* إضافة مؤقت للعبة
+
+أشجعكم على التجربة مع:
+
+* تغيير موضع عرض النقاط
+* تغيير الخط والحجم واللون
+* إضافة معلومات إضافية مثل الوقت المنقضي
+
+
+كود Python المختبر
+pythonDownloadCopy code Wrapimport turtle  # Import the turtle graphics library
+import time    # Import the time module to pause the game loop
+
+# Create a window (screen) object
+wind = turtle.Screen()                 # Create a window/screen object for the game
+wind.title("Ping Pong By Codezilla")   # Set the window title
+wind.bgcolor("black")                  # Set the background color to black
+wind.setup(width=800, height=600)      # Set window dimensions: 800 pixels wide, 600 pixels high
+wind.tracer(0)                         # Turn off automatic screen updates for better performance
+
+# madrab1 (Left Paddle)
+madrab1 = turtle.Turtle()              # Create a turtle object for the first paddle
+madrab1.speed(0)                       # Set animation speed to maximum (0 = fastest)
+madrab1.shape("square")                # Set the shape to square
+madrab1.color("blue")                  # Set the color to blue
+madrab1.shapesize(stretch_wid=5, stretch_len=1) # Stretch the square to form a paddle
+madrab1.penup()                        # Lift the pen to avoid drawing lines when moving
+madrab1.goto(-350, 0)                  # Position the paddle on the left side
+
+# madrab2 (Right Paddle)
+madrab2 = turtle.Turtle()              # Create a turtle object for the second paddle
+madrab2.speed(0)                       # Set animation speed to maximum
+madrab2.shape("square")                # Set the shape to square
+madrab2.color("red")                   # Set the color to red
+madrab2.shapesize(stretch_wid=5, stretch_len=1) # Stretch the square to form a paddle
+madrab2.penup()                        # Lift the pen to avoid drawing lines
+madrab2.goto(350, 0)                   # Position the paddle on the right side
+
+# ball
+ball = turtle.Turtle()                 # Create a turtle object for the ball
+ball.speed(0)                          # Set animation speed to maximum
+ball.shape("square")                   # Set the shape to square
+ball.color("white")                    # Set the color to white
+ball.penup()                           # Lift the pen to avoid drawing lines
+ball.goto(0, 0)                        # Position the ball at the center
+ball.dx = 1.5                          # Set ball's horizontal speed (pixels per frame)
+ball.dy = 1.5                          # Set ball's vertical speed (pixels per frame)
+
+# Score
+score1 = 0                             # Variable to store player 1's score
+score2 = 0                             # Variable to store player 2's score
+score = turtle.Turtle()                # Create a turtle object for the scoreboard
+score.speed(0)                         # Set animation speed to maximum
+score.color("white")                   # Set the text color to white
+score.penup()                          # Lift the pen to avoid drawing lines
+score.hideturtle()                     # Hide the turtle object, we only need the text
+score.goto(0, 260)                     # Position the scoreboard at the top center
+# Write the initial score on the screen
+score.write("Player 1: 0 Player 2: 0", align="center", font=("Courier", 24, "normal"))
+
+# functions
+def madrab1_up():                  # Define function to move madrab1 up
+    y = madrab1.ycor()             # Get the current y coordinate of madrab1
+    y += 20                        # Increase y by 20 pixels
+    madrab1.sety(y)                # Set madrab1's new y position
+
+def madrab1_down():                # Define function to move madrab1 down
+    y = madrab1.ycor()             # Get the current y coordinate of madrab1
+    y -= 20                        # Decrease y by 20 pixels
+    madrab1.sety(y)                # Set madrab1's new y position
+
+def madrab2_up():                  # Define function to move madrab2 up
+    y = madrab2.ycor()             # Get the current y coordinate of madrab2
+    y += 20                        # Increase y by 20 pixels
+    madrab2.sety(y)                # Set madrab2's new y position
+
+def madrab2_down():                # Define function to move madrab2 down
+    y = madrab2.ycor()             # Get the current y coordinate of madrab2
+    y -= 20                        # Decrease y by 20 pixels
+    madrab2.sety(y)                # Set madrab2's new y position
+
+# keyboard bindings
+wind.listen()                      # Tell the window to listen for keyboard input
+wind.onkeypress(madrab1_up, "w")      # When 'w' key is pressed, call madrab1_up function
+wind.onkeypress(madrab1_down, "s")    # When 's' key is pressed, call madrab1_down function
+wind.onkeypress(madrab2_up, "Up")     # When 'Up' arrow key is pressed, call madrab2_up function
+wind.onkeypress(madrab2_down, "Down") # When 'Down' arrow key is pressed, call madrab2_down function
+
+# main game loop
+while True:                        # Infinite loop to keep the game running
+    wind.update()                  # Update the screen with any changes
+    time.sleep(0.01)               # Pause the loop for a short time to control the game speed
+
+    # move the ball
+    ball.setx(ball.xcor() + ball.dx) # Move ball horizontally based on its dx value
+    ball.sety(ball.ycor() + ball.dy) # Move ball vertically based on its dy value
+
+    # border checking
+    if ball.ycor() > 290:          # Check if ball hit the top border
+        ball.sety(290)             # Keep ball at the border position
+        ball.dy *= -1              # Reverse vertical direction (bounce)
+
+    if ball.ycor() < -290:         # Check if ball hit the bottom border
+        ball.sety(-290)            # Keep ball at the border position
+        ball.dy *= -1              # Reverse vertical direction (bounce)
+
+    if ball.xcor() > 390:          # Check if ball passed the right border (Player 1 scores)
+        ball.goto(0, 0)            # Reset ball to center position
+        ball.dx *= -1              # Reverse horizontal direction for the next round
+        score1 += 1                # Add a point to Player 1
+        score.clear()              # Clear the old score from the screen
+        # Update the score display with the new scores
+        score.write(f"Player 1: {score1} Player 2: {score2}", align="center", font=("Courier", 24, "normal"))
+
+    if ball.xcor() < -390:         # Check if ball passed the left border (Player 2 scores)
+        ball.goto(0, 0)            # Reset ball to center position
+        ball.dx *= -1              # Reverse horizontal direction for the next round
+        score2 += 1                # Add a point to Player 2
+        score.clear()              # Clear the old score from the screen
+        # Update the score display with the new scores
+        score.write(f"Player 1: {score1} Player 2: {score2}", align="center", font=("Courier", 24, "normal"))
+
+    # Check for collision with the right paddle (madrab2).
+    # It checks if the ball is within the horizontal and vertical range of the paddle.
+    if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < madrab2.ycor() + 40 and ball.ycor() > madrab2.ycor() - 40):
+        ball.setx(340)             # Move the ball to the paddle's surface to prevent it from getting stuck
+        ball.dx *= -1              # Reverse the ball's horizontal direction to make it bounce
+
+    # Check for collision with the left paddle (madrab1).
+    # It checks if the ball is within the horizontal and vertical range of the paddle.
+    if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() < madrab1.ycor() + 40 and ball.ycor() > madrab1.ycor() - 40):
+        ball.setx(-340)            # Move the ball to the paddle's surface to prevent it from getting stuck
+        ball.dx *= -1              # Reverse the ball's horizontal direction to make it bounce
+
+نهاية الدرس 50

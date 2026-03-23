@@ -1,0 +1,56 @@
+# A Dictionary is a collection which is unordered, changeable, and indexed. No duplicate members.
+
+# Defining the dictionary 'person' with initial key-value pairs
+person = {
+    "first_name": "ahmed",
+    "last_name": "samy",
+    "age": 31
+}
+
+# Accessing values in the dictionary
+print(person["first_name"])  # Prints the value associated with "first_name"
+print(person.get("last_name"))  # Gets the value associated with "last_name" using get()
+
+# Constructor: Creating another dictionary using the dict() function
+person2 = dict(f_name="sara", l_name="wileam")
+
+# Adding a new key-value pair to the dictionary 'person'
+person["phone"] = "12345678"
+print(person)  # Print the 'person' dictionary to confirm the addition of the 'phone' key
+
+# Displaying dictionary keys
+print(person.keys())
+
+# Displaying dictionary items (key-value pairs)
+print(person.items())
+
+# Creating a copy of 'person' dictionary and adding a new key-value pair to 'person3'
+person3 = person.copy()
+print(person3)  # Print 'person3' to confirm it contains the same key-value pairs as 'person'
+
+person3["city"] = "cairo"
+print(person3)  # Print 'person3' to confirm the addition of the "city" key
+
+# Removing the "city" key from 'person3'
+del person3["city"]
+print(person3)  # Print 'person3' to confirm the deletion of the "city" key
+
+# Removing the "phone" key from 'person' using the pop() method
+person.pop("phone")
+print(person)  # Print 'person' to confirm the removal of the "phone" key
+
+# Clearing all items from the 'person' dictionary
+person.clear()
+print(person)  # Print 'person' to confirm it is now an empty dictionary
+
+# Getting the length (number of items) of 'person3'
+print(len(person3))  # Print the number of items in 'person3'
+
+# List of dictionaries, where each dictionary represents a person
+people = [
+    {'name': 'Martha', 'age': 30},
+    {'name': 'Kevin', 'age': 25}
+]
+
+# Accessing the name of the second dictionary in the list
+print(people[1]['name'])  # Prints 'Kevin'

@@ -1,0 +1,15 @@
+lesson 5
+في هذا الدرس قام الأخ احمد بكتابة برنامج صغير على الشاشة باستخدام الدالة print وظيفة هذا البرنامج البصيط طبباعة بعض البيانات عن المستخدم مثل 
+الأسم my name is Mahmoud Shaabo 
+العمر my age is 39 years old 
+المهنة I am a python programmer 
+ويمكن أضافة موقع شخصي أن وجد او قناة يوتيوب my wibsite is رابط الموقع 
+my youtube  channel is رابط قناة اليوتيوب 
+يصبح البرنامج على الشكل التالي 
+print("my name Is Mahmoud Shaabo")
+print("my age is 39 years old")
+print("I am a python programmer")
+print("my youtube channil is https://www.youtube.com/channel/UCnsIqvyI4qd-3WvRxkdcuzQ ")
+واذا قمنا بتشغيل البرنامج بمحرر الأكواد تصبح النتيجة كالتالي
+my name is Mahmoud Shaabomy age is 39 years oldI am a python programmermy youtube channil is https://www.youtube.com/channel/UCnsIqvyI4qd-3WvRxkdcuzQ
+ويمكن أضافة بريد ألكتروني كما أشار الأخ أحمد في هذا الدرس

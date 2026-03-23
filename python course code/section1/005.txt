@@ -1,0 +1,4 @@
+print("my name is ahmed samy")
+print("my age is 30 ")
+print("i'm a python programmer")
+print("my website: https://www.google.com ")

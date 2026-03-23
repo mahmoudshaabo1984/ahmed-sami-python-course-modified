@@ -1,0 +1,46 @@
+section 5 Lesson 27
+
+
+
+def myfun(f_name, l_name, age):
+        print(f_name + l_name, age)
+
+myfun("ahmed", "sami", "31")
+myfun("ssami", "ahmed", "31")
+
+myfun(f_name="ahmed", l_name="sami",age="31")
+myfun(l_name="sami", f_name="ahmed",age="31")
+myfun("ahmed", l_name="sami", age="31")
+myfun("sara", l_name="sami", age="31")
+
+
+
+
+
+extra python code commants in lesson 27
+
+
+
+
+
+# my fun
+def my_fun(first_name ,last_name ,age):
+    print(first_name+ last_name, age)
+
+
+# positional argument
+# my_fun("ahmed","sami","31")
+# keyword argument
+# my_fun(first_name="ahmed", last_name="sami", age="31")
+# replaise veriabale
+# my_fun(last_name="sami", first_name="ahmed", age="31")
+
+# positional argument and  keyword argument together
+# my_fun("ahmed", last_name="sami", age="31")
+# my_fun("sara", last_name="sami", age="31")
+
+#  keyword argument and  positional argument together
+# eror the code will not work
+# you must  positional argument follows keyword argument
+# my_fun(first_name="ahmed", "sami", age="31")
+

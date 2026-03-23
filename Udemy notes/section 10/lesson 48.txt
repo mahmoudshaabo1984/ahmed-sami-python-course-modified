@@ -1,0 +1,204 @@
+القسم 10: الدرس 48
+تنفيذ حركة الكرة واكتشاف التصادم مع الحدود
+المحاضر: أحمد سامي
+
+المقدمة
+صباح الخير أيها الطلاب الأعزاء. مرحباً بكم في الدرس 48 من القسم 10. اليوم نطور لعبة Ping Pong الخاصة بنا من خلال إدخال الحركة الديناميكية للكرة وتنفيذ اكتشاف التصادم مع حدود اللعبة. يمثل هذا الدرس الانتقال من عناصر اللعب الثابتة إلى تجربة لعب متحركة حقيقية.
+في هذه المحاضرة، سنستكشف الحركة المبنية على السرعة، والتحكم في معدل الإطارات، واكتشاف التصادم مع الحدود. هذه المفاهيم أساسية لأي لعبة قائمة على الفيزياء وستزودكم بالمعرفة لإنشاء حركة سلسة وواقعية في تطبيقاتكم.
+بنهاية هذا الدرس، ستفهمون كيفية تنفيذ الحركة المستمرة للكائنات، واكتشاف التصادمات مع حدود الشاشة، وإنشاء تأثيرات ارتداد واقعية. هذه المهارات تشكل الميكانيكيات الأساسية لعدد لا يحصى من الألعاب والمحاكيات.
+
+المحتوى الرئيسي
+الجزء الأول: استيراد الوحدات والتحكم بالوقت (الأسطر 1-2)
+السطر 1: import turtle
+كما في الدروس السابقة، نستورد مكتبة الرسومات turtle للوصول إلى قدرات الرسم والرسوم المتحركة.
+السطر 2: import time
+هذا الاستيراد الجديد يقدم وحدة time، التي توفر دوال مختلفة متعلقة بالوقت. سنستخدم هذه الوحدة للتحكم في سرعة حلقة اللعبة، مما يضمن لعباً متسقاً عبر سرعات الكمبيوتر المختلفة. تسمح لنا وحدة time بإدخال تأخيرات دقيقة بين تحديثات الإطارات.
+الجزء الثاني: إعداد النافذة وكائنات اللعبة (الأسطر 3-32)
+الأسطر 3-7: تكوين النافذة
+هذه الأسطر تؤسس نافذة لعبتنا بالخلفية السوداء المألوفة، والأبعاد 800×600، والتحديثات التلقائية المعطلة. الاتساق في الإعداد يضمن أساساً ثابتاً للعب المحسّن.
+الأسطر 9-32: إنشاء المضارب والكرة
+يتم إنشاء المضارب بشكل مطابق لدرسنا السابق. لكن لاحظوا الإضافات الحاسمة لكائن الكرة في السطرين 31-32:
+السطر 31: ball.dx = 1.5
+هذا السطر يقدم خاصية جديدة dx (دلتا x) لكائن الكرة، تمثل السرعة الأفقية. القيمة 1.5 تعني أن الكرة ستتحرك 1.5 بكسل أفقياً لكل تحديث إطار.
+السطر 32: ball.dy = 1.5
+بالمثل، dy (دلتا y) تمثل السرعة العمودية. معاً، dx و dy ينشئان حركة قطرية بزاوية 45 درجة عندما تكون القيمتان متساويتين.
+الجزء الثالث: دوال الحركة وروابط لوحة المفاتيح (الأسطر 34-60)
+تبقى هذه الأقسام بدون تغيير من درسنا السابق، موفرة التحكم بالمضارب من خلال مفاتيح W/S للاعب الأول ومفاتيح الأسهم للاعب الثاني. الدوال تحرك المضارب بمقدار 20 بكسل لكل ضغطة مفتاح، مما يضمن تحكماً استجابياً.
+الجزء الرابع: حلقة اللعبة المحسّنة مع حركة الكرة (الأسطر 62-65)
+السطر 62: while True:
+الحلقة اللانهائية تستمر في تشغيل لعبتنا.
+السطر 63: wind.update()
+تحدث الشاشة لعرض جميع التغييرات.
+السطر 64: time.sleep(0.01)
+هذه الإضافة الحرجة تقدم تأخيراً مقداره 10 ميللي ثانية بين كل إطار. هذا التوقف يخدم أغراضاً متعددة:
+
+* يتحكم في سرعة اللعبة إلى حوالي 100 إطار في الثانية
+* يمنع المعالج من العمل بأقصى طاقته
+* يضمن سرعة لعب متسقة عبر أجهزة الكمبيوتر المختلفة
+* يقلل استهلاك موارد النظام
+
+الجزء الخامس: تنفيذ حركة الكرة (الأسطر 67-69)
+السطر 68: ball.setx(ball.xcor() + ball.dx)
+هذا السطر ينفذ الحركة الأفقية:
+
+* ball.xcor() يسترجع الإحداثي x الحالي
+* يضيف ball.dx للتحرك أفقياً
+* setx() يحدث موضع الكرة
+
+السطر 69: ball.sety(ball.ycor() + ball.dy)
+بالمثل ينفذ الحركة العمودية:
+
+* ball.ycor() يسترجع الإحداثي y الحالي
+* يضيف ball.dy للتحرك عمودياً
+* sety() يحدث الموضع
+
+معاً، هذان السطران ينشئان حركة قطرية سلسة عبر الشاشة.
+الجزء السادس: اكتشاف التصادم مع الحدود (الأسطر 71-86)
+الأسطر 72-74: التصادم مع الحد العلوي
+pythonDownloadCopy code Wrapif ball.ycor() > 290:
+    ball.sety(290)
+    ball.dy *= -1
+هذا الكود يكتشف عندما تصطدم الكرة بالحد العلوي:
+
+* السطر 72: يفحص إذا كان إحداثي y للكرة يتجاوز 290 (10 بكسل من الحافة العلوية 300 بكسل)
+* السطر 73: يمنع الكرة من تجاوز الحد بوضعها بالضبط عند 290
+* السطر 74: يعكس الاتجاه العمودي بضرب dy في -1، مما يخلق تأثير الارتداد
+
+الأسطر 76-78: التصادم مع الحد السفلي
+pythonDownloadCopy code Wrapif ball.ycor() < -290:
+    ball.sety(-290)
+    ball.dy *= -1
+ينفذ منطقاً مطابقاً للحد السفلي:
+
+* يكتشف التصادم عند y < -290
+* يقيد موضع الكرة
+* يعكس الاتجاه العمودي للارتداد
+
+الأسطر 80-82: التصادم مع الحد الأيمن
+pythonDownloadCopy code Wrapif ball.xcor() > 390:
+    ball.goto(0, 0)
+    ball.dx *= -1
+يتعامل مع مرور الكرة للحد الأيمن:
+
+* السطر 80: يكتشف عندما تتجاوز الكرة x=390 (فاتت اللاعب الثاني)
+* السطر 81: يعيد الكرة إلى الموضع المركزي (0, 0)
+* السطر 82: يعكس الاتجاه الأفقي للإرسال التالي
+
+الأسطر 84-86: التصادم مع الحد الأيسر
+pythonDownloadCopy code Wrapif ball.xcor() < -390:
+    ball.goto(0, 0)
+    ball.dx *= -1
+يتعامل مع مرور الكرة للحد الأيسر:
+
+* يكتشف عندما تتجاوز الكرة x=-390 (فاتت اللاعب الأول)
+* يعيد إلى المركز
+* يعكس الاتجاه الأفقي
+
+الهامش البالغ 10 بكسل (290 بدلاً من 300، 390 بدلاً من 400) يأخذ في الاعتبار حجم الكرة، مانعاً إياها من الظهور وكأنها تتداخل مع الحواف.
+
+الخاتمة
+لقد حول درس اليوم لعبة Ping Pong الخاصة بنا من عرض ثابت إلى تجربة ديناميكية متحركة. لقد نجحنا في تنفيذ الحركة المستمرة للكرة باستخدام متجهات السرعة وأنشأنا تفاعلات حدود واقعية من خلال اكتشاف التصادم وعكس الاتجاه.
+المفاهيم التي غطيناها اليوم - الحركة المبنية على السرعة، والتحكم في معدل الإطارات، واكتشاف التصادم، ومحاكاة الفيزياء - أساسية لتطوير الألعاب والتطبيقات التفاعلية. هذه التقنيات تنطبق ليس فقط على الألعاب البسيطة ولكن أيضاً على المحاكيات المعقدة والبرامج الاحترافية.
+الإنجازات الرئيسية من هذا الدرس تشمل:
+
+1. تنفيذ الحركة السلسة المستمرة باستخدام مكونات السرعة
+2. التحكم في معدل الإطارات للحصول على لعب متسق عبر الأنظمة المختلفة
+3. اكتشاف التصادم مع الحدود مع سلوكيات استجابة مناسبة
+4. آلية إعادة تعيين الكرة التي تحاكي أحداث التسجيل
+
+في درسنا القادم، سننفذ تصادمات المضرب-الكرة، مما يسمح للاعبين باللعب الفعلي من خلال ضرب الكرة ذهاباً وإياباً. هذا سيكمل ميكانيكيات اللعب الأساسية للعبة Ping Pong الخاصة بنا.
+أشجعكم على التجربة مع قيم سرعة مختلفة، ومواضع الحدود، ومدد التوقف لفهم تأثيراتها على اللعب. فكروا في كيفية إضافة ميزات مثل تسريع سرعة الكرة أو تغيير زوايا الارتداد لتحسين تجربة اللعب.
+
+كود Python المختبر
+pythonDownloadCopy code Wrapimport turtle  # Import the turtle graphics library
+import time  # Import the time module to pause the game loop
+
+wind = turtle.Screen()  # Create a window/screen object for the game
+wind.title("Ping Pong By Codezilla")  # Set the window title
+wind.bgcolor("black")  # Set the background color to black
+wind.setup(width=800, height=600)  # Set window dimensions: 800 pixels wide, 600 pixels high
+wind.tracer(0)  # Turn off automatic screen updates for better performance
+
+# madrab1
+madrab1 = turtle.Turtle()  # Create a turtle object for the first paddle
+madrab1.speed(0)  # Set animation speed to maximum (0 = fastest)
+madrab1.shape("square")  # Set the shape to square
+madrab1.color("blue")  # Set the color to blue
+madrab1.shapesize(stretch_wid=5, stretch_len=1)  # Stretch the square: 5x height, 1x width
+madrab1.penup()  # Lift the pen to avoid drawing lines when moving
+madrab1.goto(-350, 0)  # Position the paddle at x=-350, y=0 (left side)
+
+# madrab2
+madrab2 = turtle.Turtle()  # Create a turtle object for the second paddle
+madrab2.speed(0)  # Set animation speed to maximum
+madrab2.shape("square")  # Set the shape to square
+madrab2.color("red")  # Set the color to red
+madrab2.shapesize(stretch_wid=5, stretch_len=1)  # Stretch the square: 5x height, 1x width
+madrab2.penup()  # Lift the pen to avoid drawing lines
+madrab2.goto(350, 0)  # Position the paddle at x=350, y=0 (right side)
+
+# ball
+ball = turtle.Turtle()  # Create a turtle object for the ball
+ball.speed(0)  # Set animation speed to maximum
+ball.shape("square")  # Set the shape to square
+ball.color("white")  # Set the color to white
+ball.penup()  # Lift the pen to avoid drawing lines
+ball.goto(0, 0)  # Position the ball at center (x=0, y=0)
+ball.dx = 1.5  # Set ball's horizontal speed (pixels per frame)
+ball.dy = 1.5  # Set ball's vertical speed (pixels per frame)
+
+# functions
+def madrab1_up():  # Define function to move madrab1 up
+    y = madrab1.ycor()  # Get the current y coordinate of madrab1
+    y += 20  # Increase y by 20 pixels
+    madrab1.sety(y)  # Set madrab1's new y position
+
+def madrab1_down():  # Define function to move madrab1 down
+    y = madrab1.ycor()  # Get the current y coordinate of madrab1
+    y -= 20  # Decrease y by 20 pixels
+    madrab1.sety(y)  # Set madrab1's new y position
+
+def madrab2_up():  # Define function to move madrab2 up
+    y = madrab2.ycor()  # Get the current y coordinate of madrab2
+    y += 20  # Increase y by 20 pixels
+    madrab2.sety(y)  # Set madrab2's new y position
+
+def madrab2_down():  # Define function to move madrab2 down
+    y = madrab2.ycor()  # Get the current y coordinate of madrab2
+    y -= 20  # Decrease y by 20 pixels
+    madrab2.sety(y)  # Set madrab2's new y position
+
+# keyboard bindings
+wind.listen()  # Tell the window to listen for keyboard input
+wind.onkeypress(madrab1_up, "w")  # When 'w' key is pressed, call madrab1_up function
+wind.onkeypress(madrab1_down, "s")  # When 's' key is pressed, call madrab1_down function
+wind.onkeypress(madrab2_up, "Up")  # When 'Up' arrow key is pressed, call madrab2_up function
+wind.onkeypress(madrab2_down, "Down")  # When 'Down' arrow key is pressed, call madrab2_down function
+
+# main game loop
+while True:  # Infinite loop to keep the game running
+    wind.update()  # Update the screen with any changes
+    time.sleep(0.01) # Pause the loop for a short time to control the game speed
+    
+    # move the ball
+    ball.setx(ball.xcor() + ball.dx)  # Move ball horizontally: current x position + dx
+    ball.sety(ball.ycor() + ball.dy)  # Move ball vertically: current y position + dy
+    
+    # border check
+    if ball.ycor() > 290:  # Check if ball hit the top border (y > 290)
+        ball.sety(290)  # Keep ball at the border position
+        ball.dy *= -1  # Reverse vertical direction (bounce)
+    
+    if ball.ycor() < -290:  # Check if ball hit the bottom border (y < -290)
+        ball.sety(-290)  # Keep ball at the border position
+        ball.dy *= -1  # Reverse vertical direction (bounce)
+    
+    if ball.xcor() > 390:  # Check if ball passed the right border (missed by player 2)
+        ball.goto(0, 0)  # Reset ball to center position
+        ball.dx *= -1  # Reverse horizontal direction
+    
+    if ball.xcor() < -390:  # Check if ball passed the left border (missed by player 1)
+        ball.goto(0, 0)  # Reset ball to center position
+        ball.dx *= -1  # Reverse horizontal direction
+
+نهاية الدرس 48

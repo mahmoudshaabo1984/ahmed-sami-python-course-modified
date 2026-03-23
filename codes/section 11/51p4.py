@@ -1,0 +1,70 @@
+
+
+
+# import  tkinter 
+from tkinter import *
+from tkinter import messagebox
+
+
+# Create the Main App Window
+age_app = Tk()
+
+# Change App title
+age_app.title("Calculate Your Age")
+
+
+# Set Dimensions
+age_app.geometry("400x200")
+
+# Write Age Label
+the_text =Label(age_app, text="Write Your Age", height=2, font=("Arial", 20))
+
+# Place The Text Into The Main Window
+the_text.pack()
+
+
+# Age Variables
+age = StringVar()
+
+# Set Default Value For Age
+age.set("00")
+
+
+# Create the input for age
+age_input = Entry(age_app, width=2 , font=("Arial", 30), textvariable=age)
+
+
+# Place the input into the main window
+age_input.pack()
+
+
+# Create the calculate function
+def calc():
+    # Get Age In Years and convert to an integer
+    the_age_value = int(age.get())
+    
+    # Get Time Units
+    months = the_age_value * 12
+    weeks = months * 4
+    days = the_age_value * 365
+    
+    # Create Text Lines
+    line_one = f"Your Age In Months Is: {months}"
+    line_two = f"Your Age In Weeks Is: {weeks}"
+    line_three = f"Your Age In Days Is: {days}"
+    
+    # Group all lines
+    all_lines = [line_one, line_two, line_three]
+    
+    # Show The Message Box
+    messagebox.showinfo("Your Age In All Time Units", "\n".join(all_lines))
+
+
+# Create the calculate button
+button = Button(age_app, text="Calculate ", width=20, height=2, bg="#0e1063", fg="white", borderwidth=0, command=calc)
+# Place button in the main window
+button.pack()
+
+
+# Run App Infinitely
+age_app.mainloop()

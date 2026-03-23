@@ -1,0 +1,159 @@
+القسم 10: الدرس 47
+تنفيذ حركة المضارب والتحكم بلوحة المفاتيح
+المحاضر: أحمد سامي
+
+المقدمة
+صباح الخير أيها الطلاب الأعزاء. مرحباً بكم في الدرس 47 من القسم 10. اليوم يمثل لحظة محورية في رحلتنا لتطوير الألعاب حيث سنحول عناصر اللعبة الثابتة إلى مكونات تفاعلية واستجابية تتفاعل مع مدخلات اللاعب.
+في هذه المحاضرة، سنستكشف المفاهيم الأساسية للتفاعل مع المستخدم في برمجة الألعاب. سنتعلم كيفية إنشاء دوال الحركة، والتقاط مدخلات لوحة المفاتيح، وربط مفاتيح محددة بإجراءات اللعبة. هذه المهارات تمثل الجسر بين العرض الثابت وتجربة اللعب التفاعلية.
+بنهاية هذا الدرس، ستفهمون كيفية تنفيذ الحركة المتحكم بها لعناصر اللعبة وإنشاء نظام تحكم استجابي يسمح للاعبين بالتفاعل مع لعبتكم في الوقت الفعلي. هذه المعرفة ضرورية لإنشاء أي تطبيق تفاعلي، وليس فقط الألعاب.
+
+المحتوى الرئيسي
+الجزء الأول: الأساس وإعداد النافذة (الأسطر 1-17)
+الأسطر 1-17: الإعداد الأساسي
+هذه الأسطر تبقى مطابقة لدرسنا السابق، حيث تؤسس نافذة اللعبة وخصائصها. نستورد وحدة turtle، ننشئ نافذة اللعبة بأبعاد 800×600 بكسل، نحدد خلفية سوداء، ونعطل التحديثات التلقائية للشاشة للحصول على أداء أمثل. هذا الأساس يوفر اللوحة التي ستعمل عليها عناصرنا التفاعلية.
+الجزء الثاني: إنشاء كائنات اللعبة (الأسطر 18-40)
+الأسطر 18-24: إنشاء المضرب الأول
+ننشئ المضرب الأول (madrab1) بنفس الخصائص السابقة: اللون الأزرق، الشكل المستطيل (تمدد 5×1)، والموضع عند x=-350. الاتساق في إنشاء الكائنات يضمن سلوكاً قابلاً للتنبؤ عبر عناصر لعبتنا.
+الأسطر 26-32: إنشاء المضرب الثاني
+المضرب الثاني (madrab2) يعكس الأول ولكن باللون الأحمر والموضع عند x=350. الإعداد المتماثل يخلق ملعباً متوازناً لكلا اللاعبين.
+الأسطر 34-40: إنشاء الكرة مع تحسين التسمية
+لاحظوا التحسين المهم في اصطلاح التسمية. كائن الكرة الآن يحمل الاسم المناسب ball بدلاً من madra2 الغامض من درسنا السابق. هذه التسمية الدلالية تجعل الكود أكثر قابلية للقراءة والصيانة. الكرة تحتفظ بلونها الأبيض وموضعها المركزي عند (0, 0).
+الجزء الثالث: دوال الحركة (الأسطر 42-60)
+الأسطر 42-45: دالة madrab1_up()
+pythonDownloadCopy code Wrapdef madrab1_up():
+    y = madrab1.ycor()
+    y += 20
+    madrab1.sety(y)
+هذه الدالة تنفذ الحركة للأعلى للمضرب الأول. دعونا نحلل كل سطر:
+
+* السطر 43: ycor() تسترجع الإحداثي y الحالي لـ madrab1
+* السطر 44: تزيد الإحداثي y بمقدار 20 بكسل
+* السطر 45: sety() تحدث موضع المضرب إلى الإحداثي y الجديد
+
+الزيادة بمقدار 20 بكسل توفر حركة سلسة ومع ذلك استجابية - ليست بطيئة جداً لتكون محبطة، ولا سريعة جداً لتفقد السيطرة.
+الأسطر 47-50: دالة madrab1_down()
+pythonDownloadCopy code Wrapdef madrab1_down():
+    y = madrab1.ycor()
+    y -= 20
+    madrab1.sety(y)
+هذه الدالة تعكس الحركة للأعلى ولكن تقلل الإحداثي y بمقدار 20 بكسل، محركة المضرب للأسفل. مسافة الحركة المتماثلة تضمن شعوراً متسقاً في اللعب.
+الأسطر 52-55: دالة madrab2_up()
+pythonDownloadCopy code Wrapdef madrab2_up():
+    y = madrab2.ycor()
+    y += 20
+    madrab2.sety(y)
+نفس المنطق ينطبق على الحركة للأعلى للمضرب الثاني. الحفاظ على أنماط حركة متسقة بين المضارب يضمن لعباً عادلاً لكلا اللاعبين.
+الأسطر 57-60: دالة madrab2_down()
+pythonDownloadCopy code Wrapdef madrab2_down():
+    y = madrab2.ycor()
+    y -= 20
+    madrab2.sety(y)
+تكمل دوال الحركة بتوفير الحركة للأسفل للمضرب الثاني. البنية المتوازية في جميع الدوال الأربع تظهر ممارسة برمجية جيدة من خلال الاتساق والقابلية للتنبؤ.
+الجزء الرابع: ربط أحداث لوحة المفاتيح (الأسطر 62-67)
+السطر 62: wind.listen()
+هذا الأمر الحاسم ينشط قدرة النافذة على استقبال مدخلات لوحة المفاتيح. بدون هذا السطر، جميع روابط لوحة المفاتيح ستكون غير فعالة. إنه يخبر البرنامج بشكل أساسي أن يبدأ الانتباه لأحداث لوحة المفاتيح.
+السطر 63: wind.onkeypress(madrab1_up, "w")
+هذا السطر ينشئ رابط حدث يصل مفتاح 'w' بدالة madrab1_up. عندما يضغط اللاعب على 'w'، تنفذ الدالة، محركة المضرب الأيسر للأعلى. اختيار 'w' يتبع مخطط التحكم WASD القياسي المألوف للاعبين.
+السطر 64: wind.onkeypress(madrab1_down, "s")
+يربط مفتاح 's' بالحركة للأسفل للمضرب الأيسر. مع 'w'، هذا يخلق تحكماً عمودياً بديهياً للاعب الأيسر.
+السطر 65: wind.onkeypress(madrab2_up, "Up")
+يخصص مفتاح السهم للأعلى لتحريك المضرب الأيمن للأعلى. استخدام مفاتيح الأسهم للاعب الثاني هو مخطط تحكم كلاسيكي يسمح للاعبين اثنين بمشاركة لوحة المفاتيح بشكل مريح.
+السطر 66: wind.onkeypress(madrab2_down, "Down")
+يكمل مخطط التحكم بربط مفتاح السهم للأسفل بالحركة للأسفل للمضرب الأيمن. مفاتيح الأسهم توفر تحكماً بديهياً يطابق الاتجاه المرئي للحركة.
+الجزء الخامس: حلقة اللعبة الرئيسية (الأسطر 69-71)
+الأسطر 69-71: الحلقة الأبدية
+pythonDownloadCopy code Wrapwhile True:
+    wind.update()
+الحلقة اللانهائية تستمر في العمل، الآن مع أهمية إضافية. كل تكرار لا يحدث العرض فقط ولكن يعالج أيضاً أي أحداث لوحة مفاتيح حدثت. استدعاء wind.update() يحدث الشاشة لإظهار حركات المضرب الناتجة عن مدخلات اللاعب، مما يخلق تجربة لعب استجابية.
+
+الخاتمة
+لقد حول درس اليوم عرض لعبتنا الثابت إلى تجربة تفاعلية. لقد نجحنا في تنفيذ دوال الحركة التي تعدل مواضع الكائنات وأنشأنا نظام تحكم بلوحة المفاتيح يستجيب لمدخلات اللاعب في الوقت الفعلي.
+المفاهيم التي استكشفناها - تعريف الدوال، معالجة الإحداثيات، البرمجة المدارة بالأحداث، وربط المدخلات - أساسية لجميع تطوير البرمجيات التفاعلية. هذه الأنماط تظهر ليس فقط في الألعاب ولكن في أي تطبيق يتطلب تفاعل المستخدم.
+النقاط الرئيسية من هذا الدرس تشمل:
+
+1. الدوال تغلف السلوكيات المتكررة، مما يجعل الكود نمطياً وقابلاً للصيانة
+2. نظام الإحداثيات يسمح بالتحكم الدقيق في تموضع الكائنات
+3. البرمجة المدارة بالأحداث تمكن واجهات المستخدم الاستجابية
+4. زيادات الحركة المتسقة تضمن لعباً سلساً وقابلاً للتنبؤ
+
+في درسنا القادم، سنضيف حركة الكرة وكشف التصادم، مما يقربنا من لعبة Ping Pong كاملة الوظائف. عناصر التحكم في المضارب التي نفذناها اليوم ستخدم غرضها الحقيقي حينها - اعتراض الكرة وإعادة توجيهها.
+أشجعكم على التجربة مع سرعات حركة مختلفة، وتجربة روابط مفاتيح بديلة، ومراقبة كيف تؤثر هذه التغييرات على شعور اللعب. تذكروا أن تطوير الألعاب يتعلق بتجربة المستخدم بقدر ما يتعلق بالتنفيذ التقني.
+
+كود Python المختبر
+pythonDownloadCopy code Wrap# Import the turtle module, which provides graphics and drawing capabilities in Python
+import turtle
+
+# Create a window (screen) object using turtle.Screen() to set up the game environment
+wind = turtle.Screen()
+
+# Set the title of the window to "Ping Pong By Codezilla"
+wind.title("Ping Pong By Codezilla")
+
+# Set the background color of the window to black
+wind.bgcolor("black")
+
+# Set up the dimensions of the window: width=800 pixels, height=600 pixels
+wind.setup(width=800, height=600)
+
+# Disable automatic screen updates (tracer(0) means updates must be manual for better performance in games)
+wind.tracer(0)
+
+# madrab1
+madrab1 = turtle.Turtle()  # Create a turtle object for paddle 1
+madrab1.speed(0)  # Set the animation speed to maximum (0 = fastest)
+madrab1.shape("square")  # Set the shape to square
+madrab1.color("blue")  # Set the color to blue
+madrab1.shapesize(stretch_wid=5, stretch_len=1)  # Stretch the square vertically by 5 and horizontally by 1
+madrab1.penup()  # Lift the pen up to prevent drawing lines when moving
+madrab1.goto(-350, 0)  # Position the paddle at x=-350, y=0
+
+# madrab2
+madrab2 = turtle.Turtle()  # Create a turtle object for paddle 2
+madrab2.speed(0)  # Set the animation speed to maximum (0 = fastest)
+madrab2.shape("square")  # Set the shape to square
+madrab2.color("red")  # Set the color to red
+madrab2.shapesize(stretch_wid=5, stretch_len=1)  # Stretch the square vertically by 5 and horizontally by 1
+madrab2.penup()  # Lift the pen up to prevent drawing lines when moving
+madrab2.goto(350, 0)  # Position the paddle at x=350, y=0
+
+# ball
+ball = turtle.Turtle()  # Create a turtle object for the ball
+ball.speed(0)  # Set the animation speed to maximum (0 = fastest)
+ball.shape("square")  # Set the shape to square
+ball.color("white")  # Set the color to white
+ball.penup()  # Lift the pen up to prevent drawing lines when moving
+ball.goto(0, 0)  # Position the ball at the center (x=0, y=0)
+
+# functions
+def madrab1_up():  # Define function to move paddle 1 up
+    y = madrab1.ycor()  # Get the current y coordinate of paddle 1
+    y += 20  # Increase y by 20
+    madrab1.sety(y)  # Set the new y coordinate
+
+def madrab1_down():  # Define function to move paddle 1 down
+    y = madrab1.ycor()  # Get the current y coordinate of paddle 1
+    y -= 20  # Decrease y by 20
+    madrab1.sety(y)  # Set the new y coordinate
+
+def madrab2_up():  # Define function to move paddle 2 up
+    y = madrab2.ycor()  # Get the current y coordinate of paddle 2
+    y += 20  # Increase y by 20
+    madrab2.sety(y)  # Set the new y coordinate
+
+def madrab2_down():  # Define function to move paddle 2 down
+    y = madrab2.ycor()  # Get the current y coordinate of paddle 2
+    y -= 20  # Decrease y by 20
+    madrab2.sety(y)  # Set the new y coordinate
+
+# keyboard bindings
+wind.listen()  # Tell the window to listen for keyboard input
+wind.onkeypress(madrab1_up, "w")  # When 'w' key is pressed, call madrab1_up function
+wind.onkeypress(madrab1_down, "s")  # When 's' key is pressed, call madrab1_down function
+wind.onkeypress(madrab2_up, "Up")  # When 'Up' arrow key is pressed, call madrab2_up function
+wind.onkeypress(madrab2_down, "Down")  # When 'Down' arrow key is pressed, call madrab2_down function
+
+# main game loop
+while True:  # Start an infinite loop to keep the game running
+    wind.update()  # Update the screen to reflect any changes (since tracer is off)
+
+نهاية الدرس 47

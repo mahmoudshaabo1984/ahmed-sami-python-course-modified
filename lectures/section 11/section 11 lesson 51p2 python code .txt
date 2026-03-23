@@ -1,0 +1,38 @@
+section 11 lesson 51p2 python code 
+
+
+
+
+# import  tkinter 
+from tkinter import *
+
+
+# Create the Main App Window
+age_app = Tk()
+
+# Change App title
+age_app.title("Calculate Your Age")
+
+
+# Set Dimensions
+age_app.geometry("400x200")
+
+# Write Age Label
+the_text =Label(age_app, text="Write Your Age", height=2, font=("Arial", 20))
+
+# Place The Text Into The Main Window
+the_text.pack()
+
+
+# Age Variables
+age = StringVar()
+
+# Set Default Value For Age
+age.set("00")
+
+
+
+
+
+# Run App Infinitely
+age_app.mainloop()

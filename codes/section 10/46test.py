@@ -1,0 +1,43 @@
+
+
+
+import turtle  # Import turtle graphics library for creating visual elements and animations
+
+wind = turtle.Screen()  # Create the main game window where all game objects will be displayed
+
+wind.title("Ping Pong By Codezilla")  # Set the text that appears in the window's title bar
+
+wind.bgcolor("black")  # Set the window's background color to black for a classic game look
+
+wind.setup(width=800, height=600)  # Define window dimensions: 800 pixels wide by 600 pixels tall
+
+wind.tracer(0)  # Turn off automatic screen updates for manual control and better performance
+
+# First paddle (left player)
+madrab1 = turtle.Turtle()  # Create a turtle object that will become the left paddle
+madrab1.speed(0)  # Set animation speed to fastest (0 = no animation delay)
+madrab1.shape("square")  # Use square as the base shape for the paddle
+madrab1.color("blue")  # Color the left paddle blue
+madrab1.shapesize(stretch_wid=5, stretch_len=1)  # Transform square into a 5x1 rectangle (paddle shape)
+madrab1.penup()  # Lift the pen to prevent drawing lines when moving
+madrab1.goto(-350, 0)  # Position paddle on the left side of screen at x=-350, y=0
+
+# Second paddle (right player)
+madrab2 = turtle.Turtle()  # Create a turtle object that will become the right paddle
+madrab2.speed(0)  # Set animation speed to fastest (0 = no animation delay)
+madrab2.shape("square")  # Use square as the base shape for the paddle
+madrab2.color("red")  # Color the right paddle red
+madrab2.shapesize(stretch_wid=5, stretch_len=1)  # Transform square into a 5x1 rectangle (paddle shape)
+madrab2.penup()  # Lift the pen to prevent drawing lines when moving
+madrab2.goto(350, 0)  # Position paddle on the right side of screen at x=350, y=0
+
+# Game ball
+madra2 = turtle.Turtle()  # Create a turtle object that will be the game ball
+madra2.speed(0)  # Set animation speed to fastest for smooth ball movement
+madra2.shape("square")  # Use square shape (appears circular at default size)
+madra2.color("white")  # Color the ball white for visibility against black background
+madra2.penup()  # Lift the pen to prevent drawing lines when moving
+madra2.goto(0, 0)  # Start the ball at the center of the screen (x=0, y=0)
+
+while True:  # Main game loop - runs forever to keep the game active
+    wind.update()  # Refresh the screen to show any changes in object positions

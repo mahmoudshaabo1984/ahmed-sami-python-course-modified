@@ -1,0 +1,69 @@
+# Import the turtle module, which provides graphics and drawing capabilities in Python
+import turtle
+# Create a window (screen) object using turtle.Screen() to set up the game environment
+wind = turtle.Screen()
+# Set the title of the window to "Ping Pong By Codezilla"
+wind.title("Ping Pong By Codezilla")
+# Set the background color of the window to black
+wind.bgcolor("black")
+# Set up the dimensions of the window: width=800 pixels, height=600 pixels
+wind.setup(width=800, height=600)
+# Disable automatic screen updates (tracer(0) means updates must be manual for better performance in games)
+wind.tracer(0)
+
+# madrab1
+madrab1 = turtle.Turtle()
+madrab1.speed(0)
+madrab1.shape("square")
+madrab1.color("blue")
+madrab1.shapesize(stretch_wid=5, stretch_len=1)
+madrab1.penup()
+madrab1.goto(-350, 0)
+
+# madrab2
+madrab2 = turtle.Turtle()
+madrab2.speed(0)
+madrab2.shape("square")
+madrab2.color("red")
+madrab2.shapesize(stretch_wid=5, stretch_len=1)
+madrab2.penup()
+madrab2.goto(350, 0)
+
+# ball
+ball = turtle.Turtle()
+ball.speed(0)
+ball.shape("square")
+ball.color("white")
+ball.penup()
+ball.goto(0, 0)
+
+# functions
+def madrab1_up():
+    y = madrab1.ycor()
+    y += 20
+    madrab1.sety(y)
+
+def madrab1_down():
+    y = madrab1.ycor()
+    y -= 20
+    madrab1.sety(y)
+
+def madrab2_up():
+    y = madrab2.ycor()
+    y += 20
+    madrab2.sety(y)
+
+def madrab2_down():
+    y = madrab2.ycor()
+    y -= 20
+    madrab2.sety(y)
+
+# keyboard bindings
+wind.listen()
+wind.onkeypress(madrab1_up, "w")
+wind.onkeypress(madrab1_down, "s")
+wind.onkeypress(madrab2_up, "Up")
+wind.onkeypress(madrab2_down, "Down")
+# main game loop
+while True:
+    wind.update()

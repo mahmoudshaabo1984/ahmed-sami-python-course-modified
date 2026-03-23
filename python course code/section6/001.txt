@@ -1,0 +1,16 @@
+# x = 30
+#y = 21
+#if x>y:
+    #print(True)
+#if 5<10:
+    #print(True)
+
+
+name = "mohamed"
+
+if name == "ahmed":
+    print("true")
+elif name == "sara":
+    print("the name is sara")
+else:
+    print("false")

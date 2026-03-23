@@ -1,0 +1,123 @@
+section 10 lesson 46 python code
+
+
+
+# استيراد مكتبة turtle التي توفر إمكانيات الرسومات والرسم في Python
+# Import the turtle module, which provides graphics and drawing capabilities in Python
+import turtle
+
+# إنشاء كائن نافذة (شاشة) باستخدام turtle.Screen() لإعداد بيئة اللعبة
+# Create a window (screen) object using turtle.Screen() to set up the game environment
+wind = turtle.Screen()
+
+# تعيين عنوان النافذة إلى "Ping Pong By Codezilla"
+# Set the title of the window to "Ping Pong By Codezilla"
+wind.title("Ping Pong By Codezilla")
+
+# تعيين لون خلفية النافذة إلى الأسود
+# Set the background color of the window to black
+wind.bgcolor("black")
+
+# إعداد أبعاد النافذة: العرض = 800 بكسل، الارتفاع = 600 بكسل
+# Set up the dimensions of the window: width=800 pixels, height=600 pixels
+wind.setup(width=800, height=600)
+
+# تعطيل التحديثات التلقائية للشاشة (tracer(0) يعني أن التحديثات يجب أن تكون يدوية لأداء أفضل في الألعاب)
+# Disable automatic screen updates (tracer(0) means updates must be manual for better performance in games)
+wind.tracer(0)
+
+# قسم المضرب الأول - madrab1
+# First paddle section - madrab1
+
+# إنشاء كائن turtle جديد يمثل المضرب الأول للاعب الأيسر
+# Create a new turtle object to represent the first paddle for the left player
+madrab1 = turtle.Turtle()
+
+# تعيين سرعة الحركة إلى 0 (أقصى سرعة) لضمان استجابة فورية
+# Set movement speed to 0 (maximum speed) for instant response
+madrab1.speed(0)
+
+# تعيين شكل المضرب إلى مربع كقاعدة أساسية قبل التمديد
+# Set the paddle shape to square as a base shape before stretching
+madrab1.shape("square")
+
+# تعيين لون المضرب الأول إلى الأزرق لتمييزه عن المضرب الآخر
+# Set the first paddle color to blue to distinguish it from the other paddle
+madrab1.color("blue")
+
+# تمديد الشكل المربع ليصبح مستطيلاً بارتفاع 5 وحدات وعرض وحدة واحدة
+# Stretch the square shape to become a rectangle with height of 5 units and width of 1 unit
+madrab1.shapesize(stretch_wid=5, stretch_len=1)
+
+# رفع القلم لمنع رسم خطوط أثناء تحريك المضرب
+# Lift the pen up to prevent drawing lines while moving the paddle
+madrab1.penup()
+
+# نقل المضرب الأول إلى الجانب الأيسر من الشاشة عند الإحداثيات (-350, 0)
+# Move the first paddle to the left side of the screen at coordinates (-350, 0)
+madrab1.goto(-350, 0)
+
+# قسم المضرب الثاني - madrab2
+# Second paddle section - madrab2
+
+# إنشاء كائن turtle جديد يمثل المضرب الثاني للاعب الأيمن
+# Create a new turtle object to represent the second paddle for the right player
+madrab2 = turtle.Turtle()
+
+# تعيين سرعة الحركة إلى 0 (أقصى سرعة) لضمان استجابة فورية
+# Set movement speed to 0 (maximum speed) for instant response
+madrab2.speed(0)
+
+# تعيين شكل المضرب إلى مربع كقاعدة أساسية قبل التمديد
+# Set the paddle shape to square as a base shape before stretching
+madrab2.shape("square")
+
+# تعيين لون المضرب الثاني إلى الأحمر لتمييزه عن المضرب الأول
+# Set the second paddle color to red to distinguish it from the first paddle
+madrab2.color("red")
+
+# تمديد الشكل المربع ليصبح مستطيلاً بارتفاع 5 وحدات وعرض وحدة واحدة
+# Stretch the square shape to become a rectangle with height of 5 units and width of 1 unit
+madrab2.shapesize(stretch_wid=5, stretch_len=1)
+
+# رفع القلم لمنع رسم خطوط أثناء تحريك المضرب
+# Lift the pen up to prevent drawing lines while moving the paddle
+madrab2.penup()
+
+# نقل المضرب الثاني إلى الجانب الأيمن من الشاشة عند الإحداثيات (350, 0)
+# Move the second paddle to the right side of the screen at coordinates (350, 0)
+madrab2.goto(350, 0)
+
+# قسم الكرة - ball
+# Ball section
+
+# إنشاء كائن turtle جديد يمثل كرة اللعبة
+# Create a new turtle object to represent the game ball
+madra2 = turtle.Turtle()
+
+# تعيين سرعة الحركة إلى 0 (أقصى سرعة) لضمان حركة سلسة للكرة
+# Set movement speed to 0 (maximum speed) for smooth ball movement
+madra2.speed(0)
+
+# تعيين شكل الكرة إلى مربع (سيبدو كدائرة صغيرة بالحجم الافتراضي)
+# Set the ball shape to square (will appear as a small circle at default size)
+madra2.shape("square")
+
+# تعيين لون الكرة إلى الأبيض ليكون واضحاً على الخلفية السوداء
+# Set the ball color to white for clear visibility on black background
+madra2.color("white")
+
+# رفع القلم لمنع رسم خطوط أثناء تحريك الكرة
+# Lift the pen up to prevent drawing lines while moving the ball
+madra2.penup()
+
+# وضع الكرة في منتصف الشاشة عند الإحداثيات (0, 0)
+# Place the ball at the center of the screen at coordinates (0, 0)
+madra2.goto(0, 0)
+
+# بدء حلقة لا نهائية للحفاظ على تشغيل اللعبة وتحديث الشاشة
+# Start an infinite loop to keep the game running and updating the screen
+while True:
+    # تحديث الشاشة يدوياً لعرض أي تغييرات حدثت على العناصر
+    # Manually update the screen to display any changes made to the elements
+    wind.update()
